@@ -1,0 +1,41 @@
+import pandas as pd
+
+# Dictionary with team stats: (wins, draws, losses)
+team_stats = {
+    "Liverpool": (25, 9, 4),
+    "Arsenal": (20, 14, 4),
+    "Manchester City": (21, 7, 10),
+    "Chelsea": (20, 9, 9),
+    "Newcastle United": (20, 6, 12),
+    "Aston Villa": (19, 9, 10),
+    "Nottingham Forest": (19, 8, 11),
+    "Brighton": (16, 13, 9),
+    "Bournemouth": (15, 11, 12),
+    "Brentford": (16, 8, 14),
+    "Fulham": (15, 9, 14),
+    "Crystal Palace": (13, 13, 12),
+    "Everton": (11, 15, 12),
+    "West Ham United": (11, 10, 17),
+    "Manchester United": (11, 9, 18),
+    "Wolves": (12, 6, 20),
+    "Tottenham Hotspur": (11, 5, 22),
+    "Leicester City": (6, 7, 25),
+    "Ipswich Town": (4, 10, 24),
+    "Southampton": (2, 6, 30),
+}
+
+# Convert to DataFrame
+df = pd.DataFrame([
+    {"Team": team, "Wins": w, "Draws": d, "Losses": l}
+    for team, (w, d, l) in team_stats.items()
+])
+
+# Add a Games Played column
+df["Games Played"] = df["Wins"] + df["Draws"] + df["Losses"]
+
+# Optional: Add probability columns
+df["Win Probability"] = (df["Wins"] / df["Games Played"]).round(3)
+df["Draw Probability"] = (df["Draws"] / df["Games Played"]).round(3)
+df["Loss Probability"] = (df["Losses"] / df["Games Played"]).round(3)
+
+print(df.head())  # View first few rows
